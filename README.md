@@ -10,4 +10,4 @@ Jednoduchá CLI aplikácia napísaná v jazyku C, ktorá vrácia odtlačok (haš
 <br><br>
 
 ----
-Viac informácií ohľadom projektu CBlake3_cli je možné nájsť v stručnej dokumentácii (`docs.pdf`).
+Viac informácií ohľadom projektu CBlake3_cli (ako napríklad opis princípu mapovanie jazyka Rust s jazykom C) je možné nájsť v stručnej dokumentácii (`docs.pdf`).
