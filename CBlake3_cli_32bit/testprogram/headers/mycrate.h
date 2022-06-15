@@ -9,3 +9,6 @@ typedef struct MyString {
 } MyString;
 
 const struct MyString *Blake3C(int8_t threads_num, const char *s);
+
+void free_Blake3C(const struct MyString *ptr);
+
