@@ -77,6 +77,21 @@ pub unsafe extern "C" fn Blake3C(threads_num: i8,s: *const c_char)-> *const MySt
     Box::into_raw(boxed)
 }
 
+#[no_mangle]
+pub unsafe extern "C" fn free_Blake3C(ptr: *const MyString) {
+    // uvolniť alokovaný string v ruste -> string je "zivy" iba ak sa nachádza v bloku kodu,
+    // t.j. po skoncení funkcie je pamat uvolnena (je dolezite string vlastniť Rustom)
+    // cize az zo smernika "vytiahneme" string, tak ho Rust sam vymaze z pamate ak uz nebude "relevantny":
+    // slide 45-50/67 v prezentácii: https://speakerdeck.com/dbrgn/calling-rust-from-c-and-java?slide=58
+    if ptr.is_null() { return; }
+    let ptr = ptr as *mut MyString;
+    let my_string_struct: Box<MyString> = Box::from_raw(ptr); // ziskanie struktury MyString
+    CString::from_raw(my_string_struct.hash_code as *mut c_char); // prebranie vlastnictva (ownership)
+    // premennu hash_time nie je potrebne explicitne vymazat z pamate (aj z dovodu prace bez raw smernika)
+    
+
+}
+
 
 /* 
 +------------------------+
