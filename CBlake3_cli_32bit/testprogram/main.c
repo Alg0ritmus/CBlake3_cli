@@ -54,6 +54,7 @@ int main(int argc, char *argv[]){
         const char *blake3_hash_code= Blake3Hash->hash_code; // ziskanie hash. kodu
         float hash_time =  Blake3Hash->hash_time; // cas hashovania v sec
         printf("Blake3 hash: %s\nTime:%f sec\n",blake3_hash_code,hash_time);
+	free_Blake3C(Blake3Hash); // zavolaj funkciu na uvolnenie hash kodu z pamate (alokovane rustom)
     }
     else{
         fprintf(stderr,"Not enought arguments parsed!\n");
