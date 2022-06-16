@@ -1,7 +1,7 @@
 # CBlake3_cli
 Jednoduchá CLI aplikácia napísaná v jazyku C, ktorá vrácia odtlačok (hašovací kód) hašovacej funkcie Blake3. Aplikácia využíva optimalizovanú a paralizovateľnú implementáciu hašovacej funkcie Blake3, ktorá je napísaná v jazyku Rust. Mapovanie Rust kódu s jazykom C (viď. zdrojový kód v adresári `CBlake3_cli_64bit/src` resp. `CBlake3_cli_32bit/src`) umožnuje vytvoriť DLL knižnicu, ktorá je využitá práve v C kóde.
 
-> Poznámka: zdrojové adresár CBlake3_cli_64bit a CBlake3_cli_32bit sú prakticky totožné, líšia sa len zložkou .cargo (pridané v CBlake3_cli_32bit) viď. docs.pdf.
+> Poznámka: zdrojové kódy pre adresáre CBlake3_cli_64bit a CBlake3_cli_32bit sú prakticky totožné, líšia sa len zložkou .cargo (pridané v CBlake3_cli_32bit) viď. docs.pdf.
 
 ## Použitie:
 
