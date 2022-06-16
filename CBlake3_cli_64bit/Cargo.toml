@@ -14,6 +14,12 @@ cbindgen = "0.20.0"
 name = "rustblake"
 crate-type = ["cdylib"]
 
+# dane moduly (v Ruste nazyvane aj ako crates) su dostupne na cloude: https://crates.io/
+# moduly s ich specifikovanymi verziami su pri preklade nasho balika (package) stiahnute z daneho cloudu
+# pouzitim tzv. wildcard oznacenia (hviezdicka - *) mozeme zvolit lubovolnu (najcastejsie sa zvoli najaktualnejsia) verziu modulu
+# viac na:
+# https://doc.rust-lang.org/cargo/reference/resolver.html
+# https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
 [dependencies]
 blake3 = { version = "1.3.1", features = ["rayon"] } 
 time = "*"
