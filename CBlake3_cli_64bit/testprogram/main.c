@@ -50,7 +50,7 @@ int main(int argc, char *argv[]){
         i++;
     }
     if (IS_FILEPATH && IS_THREADS_NUM){ // vykonaj hasovanie suboru ak je pritomna cesta k suboru a pocet vlakien
-        const MyString *Blake3Hash = Blake3C(threads,mypath); // hashovanie súboru  Blake3C(pocet vlakien, cesta k suboru), navratova hodnota je datova struktura MyString (vid headers/mycrate.h)-> pre zachovanie kompatibility s Rust API musi byt struktura MyString vyjadrena ako konstanta
+        const MyString *Blake3Hash = Blake3C(threads,mypath); // hashovanie súboru  Blake3C(pocet vlakien, cesta k suboru),  navratova hodnota je smernik na datovu strukturu MyString (vid headers/mycrate.h)-> pre zachovanie kompatibility s Rust API musi byt struktura MyString vyjadrena ako konstanta
         const char *blake3_hash_code= Blake3Hash->hash_code; // ziskanie hash. kodu
         float hash_time =  Blake3Hash->hash_time; // cas hashovania v sec
         printf("Blake3 hash: %s\nTime:%f sec\n",blake3_hash_code,hash_time);
