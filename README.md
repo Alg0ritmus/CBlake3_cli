@@ -13,3 +13,16 @@ Jednoduchá CLI aplikácia napísaná v jazyku C, ktorá vrácia odtlačok (haš
 
 ----
 Viac informácií ohľadom projektu CBlake3_cli (ako napríklad opis princípu mapovanie jazyka Rust s jazykom C) je možné nájsť v stručnej dokumentácii (`docs.pdf`).
+
+
+---
+Výslednú DLL knižnicu je možné explicitne zmenšiť o ~100kB, stačí "povedať Rustu", aby za ním upratal OS: 
+
+Viac v sekcii [Unwinding the Stack or Aborting in Response to a Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html#unwinding-the-stack-or-aborting-in-response-to-a-panic)  
+
+Stači pridať týchto pár riadkov do Cargo.toml (napr. pod sekciu `[build-dependencies]`):  
+
+```
+[profile.release]  
+panic = 'abort'  
+```
