@@ -1,0 +1,29 @@
+[package]
+name = "rustblake"
+version = "0.1.0"
+edition = "2021"
+
+# nezabudni pridat build.rs
+build = "build.rs"
+
+[build-dependencies]
+cbindgen = "0.20.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "rustblake"
+crate-type = ["cdylib"]
+
+# dane moduly (v Ruste nazyvane aj ako crates) su dostupne na cloude: https://crates.io/
+# moduly s ich specifikovanymi verziami su pri preklade nasho balika (package) stiahnute z daneho cloudu
+# pouzitim tzv. wildcard oznacenia (hviezdicka - *) mozeme zvolit lubovolnu (najcastejsie sa zvoli najaktualnejsia) verziu modulu
+# viac na:
+# https://doc.rust-lang.org/cargo/reference/resolver.html
+# https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html
+[dependencies]
+blake3 = { version = "1.3.1", features = ["rayon"] } 
+time = "*"
+chrono = "0.4"
+rayon = "1.5.1"
+libc = "0.2"
+

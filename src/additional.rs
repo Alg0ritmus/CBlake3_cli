@@ -1,0 +1,4 @@
+pub mod MyHasherStruct;
+
+
+
