@@ -1,6 +1,6 @@
 [package]
 name = "rustblake"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 
 # nezabudni pridat build.rs
@@ -26,4 +26,12 @@ time = "*"
 chrono = "0.4"
 rayon = "1.5.1"
 libc = "0.2"
+
+
+# Pokus o zmensenie dll-ka
+[profile.release]
+strip = true # Automaticky zahodí symboly vo vysledom binarnom subore
+opt-level = "s" #optimalizacia pre velkost
+lto = true # "povie" linkeru aby optimalizoval binarny subor
+codegen-units=1 # zrusi build-time paralelizaciu (build-time sa zvysi ale velkost suboru sa zmensi)
 

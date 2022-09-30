@@ -15,6 +15,83 @@ Jednoduchá CLI aplikácia napísaná v jazyku C, ktorá vrácia odtlačok (haš
 Viac informácií ohľadom projektu CBlake3_cli (ako napríklad opis princípu mapovanie jazyka Rust s jazykom C) je možné nájsť v stručnej dokumentácii (`docs.pdf`).
 
 
+## Novinky vo verzí 0.1.1
+
+<ol>
+
+<li>CBlake3_cli je od verzie 0.1.1 schopný hašhovať nie len súbory ale aj reťazce (String).
+Ak zadáme neplatnú cestu pre súbor, kt. chceme hašovať, tak CBlake3_cli túto neplatnú cestu  
+automatický vyhodnotí ako dáta.  
+
+__Príklad:__ _(hashovanie súboru)_
+
+>valid filepath: `test2.txt`  
+>
+>príkaz:  
+`Blake3cli.exe -f test2.txt -t 8`   
+>
+> _* zahašuje súbor_
+
+<br>
+
+__Príklad:__ _(hashovanie reťazca č.1)_
+
+>invalid filepath: `tento_subor_neexistuje.txt`  
+>
+>príkaz:  
+`Blake3cli.exe -f tento_subor_neexistuje.txt -t 8`   
+>
+> _* zahašuje retazec_
+
+<br>
+
+__Príklad:__ _(hashovanie reťazca č.2)_
+
+> retazec: `vstupný reťazec,kt. chcem hašhovat`  
+>
+>príkaz:  
+`Blake3cli.exe -f "vstupný reťazec,kt. chcem hašhovat" -t 8`   
+>
+> _* zahašuje retazec_
+
+<br>
+
+__Príklad:__ _(hashovanie reťazca v C kóde)_
+
+```
+char *myString = "Hello World!"; // data na hasovanie
+int threads = 8; // pocet vlákien
+
+const MyString *Blake3Hash = Blake3C(threads,myString);// hašovanie
+
+const char *blake3_hash_code= Blake3Hash->hash_code; 
+float hash_time =  Blake3Hash->hash_time; 
+
+printf("Blake3 hash: %s\nTime:%f sec\n",blake3_hash_code,hash_time);
+
+free_Blake3C(Blake3Hash); // uvolnenie pamäte
+```
+</li>
+
+
+<li>
+Verzia 0.1.1 prináša omnoho menšie DLL knižnice. Zmenšenie veľkosti DLL knižníc je dosiahnuté <a href="https://youtu.be/b2qe3L4BX-Y">konfiguraciou</a> Cargo projektu (viac v Cargo.toml).  
+
+<br>
+
+__Zmena veľkosti 32-bit. DLL knižnice:__
+
+Pôvodná veľkosť (~4700kB) -> Aktuálna veľoksť (~420kB)
+
+__Zmena veľkosti 64-bit. DLL knižnice:__
+
+Pôvodná veľkosť (~4900kB) -> Aktuálna veľoksť (~360kB)
+
+</li>
+</ol>
+
+
+
 ---
 Výslednú DLL knižnicu je možné explicitne zmenšiť o ~100kB, stačí "povedať Rustu", aby za ním upratal OS: 
 

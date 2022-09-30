@@ -8,6 +8,17 @@ use std::io::prelude::*;
 use std::time::Instant;
 
 
+use std::io;
+
+use std::fs;
+
+use std::error::Error;
+use crate::additional::MyHasherStruct::*;
+pub mod additional;
+
+
+
+
 
 // Ak chceme vratit string hodnotu, bude to komplikovane... najprv si musime vytvorit strukturu, napr. s nazvom MyString, ktora bude obsahovat
 // premennu hash_code typu *const c_char, ktory je kompatibilny s C-ckom (kniznica libc)
@@ -35,24 +46,16 @@ pub unsafe extern "C" fn Blake3C(threads_num: i8,s: *const c_char)-> *const MySt
     // Ziskanie hodnoty C retazca -> co je vlastne cesta suboru, ktory chceme hashovat
     let r_str = c_str.to_str().unwrap();
 
-    // citanie suboru
-    let mut file = File::open(r_str).expect("err"); // citanie suboru suboru
-    let mut binary_file = Vec::new(); // vytvorenie vektora (do ktoreho zapiseme data zo suboru)
-    file.read_to_end(&mut binary_file).expect("err2"); // subor do binarneho tvaru
-    
-    // inicializacia blake3 hashera
-    let mut _hasher = blake3::Hasher::new();
-    // nastavenie poctu vlakien pre hashovanie
-    rayon::ThreadPoolBuilder::new().num_threads(active_threads_usize).build_global().unwrap(); //nastavenie poctu vlakien pre paral. hasovanie dat
+    // inicializacia vytvorenej struktury HashData
+    let path_or_data = HashData::new(&r_str);
+    let mut output: String = String::new(); 
 
-    // inicializacia hash. kodu blake3
-    let result_from_update;
+    rayon::ThreadPoolBuilder::new().num_threads(active_threads_usize).build_global().unwrap(); //nastavenie poctu vlakien pre paral. hasovanie dat
     
     let now = Instant::now(); // casovac -> pre meranie
 
         {   
-                _hasher.update_rayon(&binary_file); // paralelne hasovanie dat, vykonane pomocou motody update_rayon (vid. dokumeniacia Blake3)   
-                result_from_update=_hasher.finalize();   
+            output = path_or_data.hash(); 
         }
     
     let elapsed = now.elapsed(); // koniec merania
@@ -64,7 +67,7 @@ pub unsafe extern "C" fn Blake3C(threads_num: i8,s: *const c_char)-> *const MySt
     // Pre vratenie retazca z Rustu do C kodu potrebujeme naplnit strukturu MyString a vratit ju
     
     // konvertovanie hash. kodu, ktory je typu ArrayByte na typ String (typ String je "Rustovsky" typ, nie je kompatibilny s jazykom C )
-    let output : String = result_from_update.to_hex().to_string();
+
 
     // naplnenie struktury MyString 
     let boxed = Box::new(MyString {

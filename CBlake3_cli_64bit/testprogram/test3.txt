@@ -1,1 +1,0 @@
-Tento subor sluzi len na demonstracne ucely. Tento subor bude hashovany CLI aplikaciou.
