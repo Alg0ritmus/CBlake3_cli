@@ -76,7 +76,7 @@ int main(){
 
     free_Blake3C(Blake3Hash); // uvolnenie pamäte
       
-	return (0);
+    return (0);
 }
 ```
 </li>
