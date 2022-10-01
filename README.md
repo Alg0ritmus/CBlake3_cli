@@ -90,7 +90,7 @@ Pôvodná veľkosť (~4900kB) -> Aktuálna veľoksť (~360kB)
 </li>
 
 <li>
-Hašovanie súborov. V pôvodnej verzii sa pri hašovaní veľkých súborov správal program nepredvídateľne a častokrát "padal". Príčinou toho bolo preťaženie pamäte RAM, pretože pri hašovaní sa súbor načítal do pamäte celý. Od verzie 0.1.1 sa súbor načitáva do pamäte po blokoch o veľkosti 65536 B, čo by malo predstavovať zabrániť "padaniu" programu. Nevýhodou je dlhší čas hašovania súboru. Veľkosť bloku, ktorý slúži ako buffer pri čítani súboru je fixne nastavený na hodnotu 65536 B, pričom túto veľkosť môžeme manuálne zmeniť (viď. funkcia <a href="">read_buffered_and_hash_from_file</a>), hoci sa to neodporúča.  
+Hašovanie súborov. V pôvodnej verzii sa pri hašovaní veľkých súborov správal program nepredvídateľne a častokrát "padal". Príčinou toho bolo preťaženie pamäte RAM, pretože pri hašovaní sa súbor načítal do pamäte celý. Od verzie 0.1.1 sa súbor načitáva do pamäte po blokoch o veľkosti 65536 B, čo by malo zabrániť "padaniu" programu. Nevýhodou je dlhší čas hašovania súboru. Veľkosť bloku, ktorý slúži ako buffer pri čítani súboru je fixne nastavený na hodnotu 65536 B, pričom túto veľkosť môžeme manuálne zmeniť (viď. funkcia <a href="https://github.com/Alg0ritmus/CBlake3_cli/blob/0.1.1/CBlake3_cli_64bit/src/additional/MyHasherStruct.rs#L97">read_buffered_and_hash_from_file</a>), hoci sa to neodporúča.  
 
 Hašovanie reťazcov nepodlieha buffrovaniu, a teda reťazec sa pri hašovaní načíta do pamäte celý.
 </li>
