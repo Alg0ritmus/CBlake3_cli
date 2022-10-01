@@ -79,6 +79,7 @@ int main(){
     return (0);
 }
 ```
+<p style="font-size:0.5em;">*Overiť hašovací kód je možné na <a href="https://connor4312.github.io/blake3/index.html">tejto linke</a>.</p>
 </li>
 
 
