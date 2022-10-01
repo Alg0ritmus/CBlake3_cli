@@ -59,17 +59,25 @@ __Príklad:__ _(hashovanie reťazca č.2)_
 __Príklad:__ _(hashovanie reťazca v C kóde)_
 
 ```
-char *myString = "Hello World!"; // data na hasovanie
-int threads = 8; // pocet vlákien
+#include <stdio.h>
+#include "headers/mycrate.h" // import hlavickovych suborov
 
-const MyString *Blake3Hash = Blake3C(threads,myString);// hašovanie
 
-const char *blake3_hash_code= Blake3Hash->hash_code; 
-float hash_time =  Blake3Hash->hash_time; 
+int main(){
+    char *myString = "Hello World!"; // data na hasovanie
+    int threads = 8; // pocet vlákien
 
-printf("Blake3 hash: %s\nTime:%f sec\n",blake3_hash_code,hash_time);
+    const MyString *Blake3Hash = Blake3C(threads,myString);// hašovanie
 
-free_Blake3C(Blake3Hash); // uvolnenie pamäte
+    const char *blake3_hash_code= Blake3Hash->hash_code; 
+    float hash_time =  Blake3Hash->hash_time; 
+
+    printf("Blake3 hash: %s\nTime:%f sec\n",blake3_hash_code,hash_time);
+
+    free_Blake3C(Blake3Hash); // uvolnenie pamäte
+      
+	return (0);
+}
 ```
 </li>
 
