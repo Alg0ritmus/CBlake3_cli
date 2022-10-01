@@ -97,6 +97,9 @@ Hašovanie reťazcov nepodlieha buffrovaniu, a teda reťazec sa pri hašovaní n
 </ol>
 
 
+## Plány do budúcna
+Následujúca verzia CBlake3_cli by mala vyriešiť problém s chybovými správami (error msg), ktoré budú vypísané na výstup.  
+Taktiež možnosť si zvoliť načítanie celého súboru do RAM pamäte (zvýšenie rýchlosti hašovania) alebo čítať súbor po blokoch (zabráni potencionálnemu padaniu programu).
 
 ---
 Výslednú DLL knižnicu je možné explicitne zmenšiť o ~100kB, stačí "povedať Rustu", aby za ním upratal OS (toto nastavenie je možné využiť pokiaľ užívateľ "vie čo robí"): 
@@ -109,3 +112,4 @@ Stači pridať týchto pár riadkov do Cargo.toml (napr. pod sekciu `[build-depe
 [profile.release]  
 panic = 'abort'  
 ```
+
