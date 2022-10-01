@@ -91,7 +91,10 @@ pub fn read_buffered_and_hash_from_bytes(buffer: &str )->Result<String, Box<dyn 
 // Box<dyn Error>  basically return any Type of error
 pub fn read_buffered_and_hash_from_file(path: &str)->Result<String, Box<dyn Error>>{
     let mut hasher = blake3::Hasher::new();
-    let mut buffer = [0; 5000000]; // was [0; 65536];
+    // windows stack buffer is ~1MB, try to keep buffer size at 65 536, which should be save
+    // but might be slow. You can experiment with buffer size to increase speed of reading file
+    // If size of buffer exceeds stack size, program will panic.
+    let mut buffer = [0; 65536]; // was [0; 65536]; 
     let mut file = File::open(path)?;
 
     loop {

@@ -88,12 +88,18 @@ __Zmena veľkosti 64-bit. DLL knižnice:__
 Pôvodná veľkosť (~4900kB) -> Aktuálna veľoksť (~360kB)
 
 </li>
+
+<li>
+Hašovanie súborov. V pôvodnej verzii sa pri hašovaní veľkých súborov správal program nepredvídateľne a častokrát "padal". Príčinou toho bolo preťaženie pamäte RAM, pretože pri hašovaní sa súbor načítal do pamäte celý. Od verzie 0.1.1 sa súbor načitáva do pamäte po blokoch o veľkosti 65536 B, čo by malo predstavovať zabrániť "padaniu" programu. Nevýhodou je dlhší čas hašovania súboru. Veľkosť bloku, ktorý slúži ako buffer pri čítani súboru je fixne nastavený na hodnotu 65536 B, pričom túto veľkosť môžeme manuálne zmeniť (viď. funkcia <a href="">read_buffered_and_hash_from_file</a>), hoci sa to neodporúča.  
+
+Hašovanie reťazcov nepodlieha buffrovaniu, a teda reťazec sa pri hašovaní načíta do pamäte celý.
+</li>
 </ol>
 
 
 
 ---
-Výslednú DLL knižnicu je možné explicitne zmenšiť o ~100kB, stačí "povedať Rustu", aby za ním upratal OS: 
+Výslednú DLL knižnicu je možné explicitne zmenšiť o ~100kB, stačí "povedať Rustu", aby za ním upratal OS (toto nastavenie je možné využiť pokiaľ užívateľ "vie čo robí"): 
 
 Viac v sekcii [Unwinding the Stack or Aborting in Response to a Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html#unwinding-the-stack-or-aborting-in-response-to-a-panic)  
 
